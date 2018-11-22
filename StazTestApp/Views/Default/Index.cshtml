@@ -1,0 +1,36 @@
+﻿@model IEnumerable<StazTestApp.Models.Przedmiot>
+
+@{
+    ViewBag.Title = "Lista zakupów";
+}
+
+<h2>Lista zakupów</h2>
+
+@(Html.Kendo().Grid(Model).Name("Przedmioty").Columns(c => {
+    //c.Bound(p => p.ItemID).Title("tmp");
+    c.Bound(p => p.Name).Title("Nazwa produktu");
+    c.Bound(p => p.Price).Title("Cena/szt.").Format("{0:c}");
+    c.Bound(p => p.Quantity).Title("Ilość sztuk");
+    c.Bound(p => p.Description).Title("Opis produktu");
+    c.Command(command => { command.Edit(); command.Destroy(); }).Width(190);
+})
+    .Pageable()
+    .Sortable()
+    .Editable(e => e.Mode(GridEditMode.PopUp))
+    .ToolBar(command => command.Create())
+    .DataSource(dataSource => dataSource
+        .Server()
+        .Model(model => model.Id(p => p.ItemID))
+        .Create(create => create.Action("Create", "Default"))
+        .Read(read => read.Action("Index", "Default"))
+        .Update(update => update.Action("Update", "Default"))
+        .Destroy(destroy => destroy.Action("Destroy", "Default"))
+        .PageSize(5)
+    )
+)
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("form.k-edit-form").kendoValidator();
+    });
+</script>
