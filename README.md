@@ -1,2 +1,2 @@
 # staz-web-app
-Aplikacja stworzona jako zadanie przy aplikacji na staż.
+Aplikacja .NET stworzona jako zadanie przy aplikacji na staż z wykorzystaniem pakietu Telerik.
